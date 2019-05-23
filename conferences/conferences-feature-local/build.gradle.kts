@@ -1,14 +1,12 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("kapt")
-    kotlin("android.extensions")
 }
 
 android {
     compileSdkVersion(Setup.compileSdkVersion)
     defaultConfig {
-        applicationId = Setup.applicationId
         minSdkVersion(Setup.minSdkVersion)
         targetSdkVersion(Setup.targetSdkVersion)
         versionCode = Setup.versionCode
@@ -20,7 +18,6 @@ android {
             isMinifyEnabled = false
             proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             proguardFile("proguard-rules.pro")
-            file("./configs/proguard/libs").list().forEach { proguardFile(it) }
         }
     }
     compileOptions {
@@ -30,18 +27,20 @@ android {
 }
 
 dependencies {
-    implementation(project(":conferences-feature"))
-    implementation(project(":conferences-feature-core"))
-    implementation(project(":core-utils"))
-    implementation(project(":core-ui"))
-
     implementation(Dependencies.kotlin)
 
-    implementation(Dependencies.appCompat)
-    implementation(Dependencies.design)
-    implementation(Dependencies.constraintLayout)
-    implementation(Dependencies.multidex)
+    implementation(Dependencies.rxJava)
+
+    implementation(Dependencies.Dagger.runtime)
+    kapt(Dependencies.Dagger.kapt)
+
+    implementation(Dependencies.Room.runtime)
+    implementation(Dependencies.Room.rx)
+    kapt(Dependencies.Room.kapt)
 
     implementation(Dependencies.stetho)
-    implementation(Dependencies.cicerone)
+
+    testImplementation(Dependencies.Room.test)
+    testImplementation(Dependencies.Test.junit)
+    androidTestImplementation(Dependencies.Test.testRunner)
 }

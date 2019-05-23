@@ -9,7 +9,14 @@ object Versions {
     const val ktx = "1.0.1"
     const val stetho = "1.5.1"
     const val retrofit = "2.5.0"
-    const val picasso = "2.7182"
+    const val picasso = "2.71828"
+    const val junit = "4.12"
+    const val testRunner = "1.1.1"
+    const val espresso = "3.1.1"
+    const val androidx = "1.1.0-alpha05"
+    const val design = "1.1.0-alpha06"
+    const val constraintLayout = "1.1.2"
+    const val multidex = "2.0.0"
 }
 
 object Dependencies {
@@ -34,6 +41,10 @@ object Dependencies {
     }
 
     const val ktx = "androidx.core:core-ktx:${Versions.ktx}"
+    const val appCompat = "androidx.appcompat:appcompat:${Versions.androidx}"
+    const val design = "com.google.android.material:material:${Versions.design}"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val multidex = "androidx.multidex:multidex:${Versions.multidex}"
 
     const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
 
@@ -44,4 +55,10 @@ object Dependencies {
     }
 
     const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+
+    object Test {
+        const val junit = "junit:junit:${Versions.junit}"
+        const val testRunner = "androidx.test:runner:${Versions.testRunner}"
+        const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+    }
 }
