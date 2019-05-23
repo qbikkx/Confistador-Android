@@ -1,0 +1,1 @@
+include(":app", ":conferences-feature-core", ":conferences-feature-local", ":conferences-feature-remote", ":conferences-feature-repository", ":conferences-feature-domain", ":conferences-feature", ":core-ui")
