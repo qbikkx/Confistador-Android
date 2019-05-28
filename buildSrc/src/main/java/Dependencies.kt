@@ -30,7 +30,11 @@ object Dependencies {
         const val kapt = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     }
 
-    const val moshiKapt = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+    object Moshi {
+        const val runtime = "com.squareup.moshi:moshi:${Versions.moshi}"
+        const val kapt = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+    }
+
     const val cicerone = "ru.terrakok.cicerone:cicerone:${Versions.cicerone}"
 
     object Room {

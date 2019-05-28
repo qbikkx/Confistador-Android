@@ -14,10 +14,15 @@ android {
         testInstrumentationRunner = Setup.testInstrumentationRunner
     }
     buildTypes {
-        getByName("release") {
+        getByName("debug") {
             isMinifyEnabled = false
+            buildConfigField("String", "BASE_API_URL", "\"https://github.com/tech-conferences/conference-data/blob/master/\"")
+        }
+        getByName("release") {
+            isMinifyEnabled = true
             proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             proguardFile("proguard-rules.pro")
+            buildConfigField("String", "BASE_API_URL", "\"https://github.com/tech-conferences/conference-data/blob/master/\"")
         }
     }
     compileOptions {
@@ -38,7 +43,8 @@ dependencies {
     implementation(Dependencies.Retrofit.rxAdapter)
     implementation(Dependencies.Retrofit.moshiConverter)
 
-    kapt(Dependencies.moshiKapt)
+    implementation(Dependencies.Moshi.runtime)
+    kapt(Dependencies.Moshi.kapt)
 
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.testRunner)
