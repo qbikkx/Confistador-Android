@@ -30,6 +30,7 @@ dependencies {
     implementation(project(":conferences-feature-repository"))
     implementation(project(":conferences-feature-core"))
     implementation(project(":core-utils"))
+    implementation(project(":core-domain"))
 
     implementation(Dependencies.kotlin)
 

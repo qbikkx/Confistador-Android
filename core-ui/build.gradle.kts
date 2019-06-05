@@ -32,6 +32,13 @@ dependencies {
     implementation(Dependencies.ktx)
     implementation(Dependencies.rxAndroid)
 
+    implementation(Dependencies.appCompat)
+    implementation(Dependencies.design)
+
+    implementation(Dependencies.Dagger.runtime)
+
+    implementation(Dependencies.cicerone)
+
     implementation(Dependencies.picasso)
 
     testImplementation(Dependencies.Test.junit)
