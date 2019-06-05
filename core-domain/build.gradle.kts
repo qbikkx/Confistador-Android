@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
 }
 
 android {
@@ -27,18 +26,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":conferences-feature-local"))
-    implementation(project(":conferences-feature-remote"))
-    implementation(project(":conferences-feature-core"))
-    implementation(project(":core-utils"))
-    implementation(project(":core-domain"))
-
     implementation(Dependencies.kotlin)
-
-    implementation(Dependencies.rxJava)
-
-    implementation(Dependencies.Dagger.runtime)
-    kapt(Dependencies.Dagger.kapt)
 
     testImplementation(Dependencies.Test.junit)
 }

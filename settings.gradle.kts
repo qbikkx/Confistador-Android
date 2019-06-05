@@ -1,4 +1,4 @@
-include(":app", ":core-utils", "core-ui")
+include(":app", ":core-utils", "core-ui", "core-domain")
 
 include(":conferences-feature-core")
 project(":conferences-feature-core").projectDir = file("conferences/conferences-feature-core")

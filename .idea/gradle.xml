@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/conferences/conferences-feature-local" />
             <option value="$PROJECT_DIR$/conferences/conferences-feature-remote" />
             <option value="$PROJECT_DIR$/conferences/conferences-feature-repository" />
+            <option value="$PROJECT_DIR$/core-domain" />
             <option value="$PROJECT_DIR$/core-ui" />
             <option value="$PROJECT_DIR$/core-utils" />
           </set>
