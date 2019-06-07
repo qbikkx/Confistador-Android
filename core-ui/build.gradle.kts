@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 android {
@@ -36,6 +37,7 @@ dependencies {
     implementation(Dependencies.design)
 
     implementation(Dependencies.Dagger.runtime)
+    kapt(Dependencies.Dagger.kapt)
 
     implementation(Dependencies.cicerone)
 

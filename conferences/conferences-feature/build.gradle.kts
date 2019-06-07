@@ -35,6 +35,10 @@ dependencies {
 
     implementation(Dependencies.kotlin)
 
+    implementation(Dependencies.appCompat)
+    implementation(Dependencies.design)
+    implementation(Dependencies.constraintLayout)
+
     implementation(Dependencies.cicerone)
 
     implementation(Dependencies.ktx)

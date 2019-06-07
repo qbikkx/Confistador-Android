@@ -35,6 +35,9 @@ dependencies {
     implementation(project(":core-utils"))
     implementation(project(":core-ui"))
 
+    implementation(Dependencies.Dagger.runtime)
+    kapt(Dependencies.Dagger.kapt)
+
     implementation(Dependencies.kotlin)
 
     implementation(Dependencies.appCompat)
