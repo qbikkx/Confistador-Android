@@ -4,6 +4,7 @@ import dev.qbikkx.conferences.R
 import dev.qbikkx.coreui.BaseFragment
 
 internal class ConferencesListFragment : BaseFragment() {
+
     override val layoutRes = R.layout.fragment_conferences_list
 
     override fun setupDependencies() {
@@ -11,6 +12,7 @@ internal class ConferencesListFragment : BaseFragment() {
     }
 
     override fun subscribeToEvents() {
+
 
     }
 

@@ -32,6 +32,8 @@ dependencies {
 
     implementation(Dependencies.ktx)
     implementation(Dependencies.rxAndroid)
+    implementation(Dependencies.rxRelay)
+    implementation(Dependencies.rxKotlin)
 
     implementation(Dependencies.appCompat)
     implementation(Dependencies.design)

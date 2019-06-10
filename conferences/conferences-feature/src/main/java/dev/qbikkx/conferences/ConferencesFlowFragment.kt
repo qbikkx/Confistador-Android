@@ -12,8 +12,7 @@ internal class ConferencesFlowFragment : FlowFragment() {
     override fun setupDependencies() =
         ConferencesFlowInitializer.init(this).inject(this)
 
-    override fun subscribeToEvents() {
-    }
+    override fun subscribeToEvents() {}
 
     companion object {
         fun newInstance() = ConferencesFlowFragment()

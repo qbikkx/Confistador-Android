@@ -17,6 +17,8 @@ object Versions {
     const val design = "1.1.0-alpha06"
     const val constraintLayout = "1.1.2"
     const val multidex = "2.0.0"
+    const val rxRelay = "2.1.0"
+    const val rxKotlin = "2.3.0"
 }
 
 object Dependencies {
@@ -24,6 +26,8 @@ object Dependencies {
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
+    const val rxRelay = "com.jakewharton.rxrelay2:rxrelay:${Versions.rxRelay}"
+    const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
 
     object Dagger {
         const val runtime = "com.google.dagger:dagger:${Versions.dagger}"
