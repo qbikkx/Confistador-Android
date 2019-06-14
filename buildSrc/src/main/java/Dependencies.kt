@@ -19,6 +19,7 @@ object Versions {
     const val multidex = "2.0.0"
     const val rxRelay = "2.1.0"
     const val rxKotlin = "2.3.0"
+    const val viewModel = "2.0.0"
 }
 
 object Dependencies {
@@ -28,6 +29,8 @@ object Dependencies {
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     const val rxRelay = "com.jakewharton.rxrelay2:rxrelay:${Versions.rxRelay}"
     const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
+
+    const val viewModel = "androidx.lifecycle:lifecycle-extensions:${Versions.viewModel}"
 
     object Dagger {
         const val runtime = "com.google.dagger:dagger:${Versions.dagger}"
@@ -59,7 +62,7 @@ object Dependencies {
     object Retrofit {
         const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-        const val rxAdapter = "com.squareup.retrofit2:adapter-rxjava:${Versions.retrofit}"
+        const val rxAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     }
 
     const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"

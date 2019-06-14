@@ -32,12 +32,17 @@ dependencies {
     implementation(project(":conferences-feature-core"))
     implementation(project(":core-ui"))
     implementation(project(":core-utils"))
+    implementation(project(":core-domain"))
 
     implementation(Dependencies.kotlin)
 
     implementation(Dependencies.appCompat)
     implementation(Dependencies.design)
     implementation(Dependencies.constraintLayout)
+    implementation(Dependencies.viewModel)
+    kapt("androidx.lifecycle:lifecycle-compiler:2.0.0")
+
+    implementation(Dependencies.rxRelay)
 
     implementation(Dependencies.cicerone)
 

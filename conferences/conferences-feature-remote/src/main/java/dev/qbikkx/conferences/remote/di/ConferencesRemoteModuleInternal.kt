@@ -5,11 +5,11 @@ import dagger.Module
 import dagger.Provides
 import dev.qbikkx.conferences.remote.BuildConfig
 import dev.qbikkx.conferences.remote.api.ConferencesApi
-import dev.qbikkx.conferences.remote.model.ConferenceRemote
-import dev.qbikkx.conferences.remote.model.ConferenceRemoteJsonAdapter
+import dev.qbikkx.conferences.remote.external.CurlLoggingInterceptor
 import okhttp3.OkHttpClient
+import retrofit2.CallAdapter
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
@@ -20,21 +20,18 @@ internal object ConferencesRemoteModuleInternal {
     @JvmStatic
     @Provides
     fun provideObjectMapper(): Moshi {
-        var moshi = Moshi.Builder().build()
-        moshi = moshi.newBuilder().add(ConferenceRemoteJsonAdapter(moshi)).build()
-        val adapter = moshi.adapter(ConferenceRemote::class.java)
-        TODO() //return MoshiConverterFactory.create()
+        return Moshi.Builder().build()
     }
 
     @Singleton
     @JvmStatic
     @Provides
-    fun provideConverterFactory(moshi: Moshi) = MoshiConverterFactory.create(moshi)
+    fun provideConverterFactory(moshi: Moshi) = MoshiConverterFactory.create(moshi).asLenient()
 
     @Singleton
     @Provides
     @JvmStatic
-    fun provideRxJavaCallAdapterFactory() = RxJavaCallAdapterFactory.create()
+    fun provideRxJavaCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory.create()
 
 
     @Singleton
@@ -44,7 +41,7 @@ internal object ConferencesRemoteModuleInternal {
         val builder = OkHttpClient.Builder()
 
         if (BuildConfig.DEBUG) {
-            //builder.addInterceptor()
+            builder.addInterceptor(CurlLoggingInterceptor())
         }
 
         return builder.build()
@@ -56,7 +53,7 @@ internal object ConferencesRemoteModuleInternal {
     fun provideRetrofit(
         client: OkHttpClient,
         converterFactory: MoshiConverterFactory,
-        rxJavaCallAdapterFactory: RxJavaCallAdapterFactory
+        rxJavaCallAdapterFactory: CallAdapter.Factory
     ) = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_API_URL)
         .addConverterFactory(converterFactory)

@@ -13,37 +13,37 @@ import io.reactivex.rxkotlin.withLatestFrom
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.Executors
 
-interface Message
+interface ElmMessage
 
-object Idle : Message
+object Idle : ElmMessage
 
-interface SideEffect
+interface ElmSideEffect
 
-object None : SideEffect
+object None : ElmSideEffect
 
-interface StateModel
+interface ElmStateModel
 
-interface ViewModel
+interface ElmViewModel
 
-interface MviView<M : Message, V : ViewModel> {
+interface MviView<M : ElmMessage, V : ElmViewModel> {
     val messages: Observable<M>
     fun render(viewModel: V)
 }
 
-interface Reducer<S : StateModel, M : Message, E : SideEffect> {
+interface ElmReducer<S : ElmStateModel, M : ElmMessage, E : ElmSideEffect> {
     fun reduce(state: S, message: M): Pair<S, E>
 }
 
-interface Middleware<E : SideEffect, M : Message> {
+interface Middleware<E : ElmSideEffect, M : ElmMessage> {
     fun bind(effects: Observable<E>): Observable<M>
 }
 
-interface StateViewMapper<S : StateModel, V : ViewModel> {
+interface StateViewMapper<S : ElmStateModel, V : ElmViewModel> {
     fun map(state: S): V
 }
 
-class Store<S : StateModel, M : Message, E : SideEffect, V : ViewModel>(
-    private val reducer: Reducer<S, M, E>,
+open class ElmStore<S : ElmStateModel, M : ElmMessage, E : ElmSideEffect, V : ElmViewModel>(
+    private val reducer: ElmReducer<S, M, E>,
     private val middlewares: List<Middleware<E, M>>,
     private val stateMapper: StateViewMapper<S, V>,
     initialState: S,

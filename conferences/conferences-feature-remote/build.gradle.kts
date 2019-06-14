@@ -16,13 +16,13 @@ android {
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
-            buildConfigField("String", "BASE_API_URL", "\"https://github.com/tech-conferences/conference-data/blob/master/\"")
+            buildConfigField("String", "BASE_API_URL", "\"https://raw.githubusercontent.com/tech-conferences/conference-data/master/\"")
         }
         getByName("release") {
             isMinifyEnabled = true
             proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             proguardFile("proguard-rules.pro")
-            buildConfigField("String", "BASE_API_URL", "\"https://github.com/tech-conferences/conference-data/blob/master/\"")
+            buildConfigField("String", "BASE_API_URL", "\"https://raw.githubusercontent.com/tech-conferences/conference-data/master/\"")
         }
     }
     compileOptions {
