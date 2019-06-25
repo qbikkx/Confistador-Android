@@ -1,19 +1,23 @@
 package dev.qbikkx.conferences.list
 
+import android.util.Log
 import dev.qbikkx.conferences.core.Conference
 import dev.qbikkx.conferences.domain.GetConferencesUseCase
 import dev.qbikkx.core.domain.Result
+import dev.qbikkx.coreui.FlowRouter
 import dev.qbikkx.coreui.elm.*
 import io.reactivex.Observable
 
 internal sealed class Message : ElmMessage {
     object Init : Message()
+    object BackPressed : Message()
     object Refresh : Message()
     data class ConferencesResult(val status: Result.Status, val conferences: List<Conference>?) : Message()
 }
 
 internal sealed class SideEffect : ElmSideEffect {
     object LoadRequest : SideEffect()
+    object BackPress : SideEffect()
 }
 
 internal data class ConfListViewModel(
@@ -36,12 +40,15 @@ internal data class ConfListState(
     }
 }
 
-internal class ConferencesListReducer : ElmReducer<ConfListState, Message, ElmSideEffect> {
+internal class ConferencesListReducer : ElmReducer<ConfListState> {
 
-    override fun reduce(state: ConfListState, message: Message): Pair<ConfListState, ElmSideEffect> {
+    override fun reduce(state: ConfListState, message: ElmMessage): Pair<ConfListState, ElmSideEffect> {
+        Log.d("WOW", "$message")
         return when (message) {
             Message.Init, Message.Refresh -> state to SideEffect.LoadRequest
             is Message.ConferencesResult -> onConferencesResult(message, state)
+            Message.BackPressed -> state to SideEffect.BackPress
+            else -> throw IllegalStateException("unknown message : $message")
         }
     }
 
@@ -59,7 +66,8 @@ internal class ConferencesListReducer : ElmReducer<ConfListState, Message, ElmSi
                 conferences = message.conferences!!
             )
             is Result.Status.Error -> state.copy(
-                isLoadingConferences = false
+                isLoadingConferences = false,
+                conferences = message.conferences ?: state.conferences
             )
         } to None
     }
@@ -79,20 +87,38 @@ internal class ConferencesListStateMapper : StateViewMapper<ConfListState, ConfL
 
 internal class LoadConferencesMiddleware(
     private val getConferencesUseCase: GetConferencesUseCase
-) : Middleware<ElmSideEffect, Message> {
+) : Middleware {
 
-    override fun bind(effects: Observable<ElmSideEffect>): Observable<Message> {
+    override fun bind(effects: Observable<ElmSideEffect>): Observable<ElmMessage> {
         return effects.ofType(SideEffect.LoadRequest::class.java)
             .switchMap { getConferencesUseCase.execute() }
             .map { Message.ConferencesResult(status = it.status, conferences = it.data) }
     }
 }
 
+internal class NavigationMiddleware(
+    private val flowRouter: FlowRouter
+) : Middleware {
+
+    override fun bind(effects: Observable<ElmSideEffect>): Observable<ElmMessage> {
+        return effects.ofType(SideEffect.BackPress::class.java)
+            .map {
+                flowRouter.exit()
+                Idle
+            }
+    }
+}
+
 internal class ConferencesFeatureStore(
-    getConferencesUseCase: GetConferencesUseCase
-) : ElmStore<ConfListState, Message, ElmSideEffect, ConfListViewModel>(
+    getConferencesUseCase: GetConferencesUseCase,
+    flowRouter: FlowRouter
+) : ElmStore<ConfListState, ConfListViewModel>(
     reducer = ConferencesListReducer(),
-    middlewares = listOf(LoadConferencesMiddleware(getConferencesUseCase)),
+    middlewares = listOf(
+        LoadConferencesMiddleware(getConferencesUseCase),
+        NavigationMiddleware(flowRouter)
+    ),
     stateMapper = ConferencesListStateMapper(),
-    initialState = ConfListState.initial
+    initialState = ConfListState.initial,
+    initialMessage = Message.Init
 )

@@ -33,20 +33,18 @@ internal class ConferencesRepositoryImpl @Inject constructor(
             }
             .onErrorReturn { Result.Status.Error(it) }
             .toObservable()
+            .startWith(Result.Status.Loading)
 
         val localStream = local.getConferences()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
-            .map { conferencesLocal ->
-                conferencesLocal.map { it.toConferenceDomain() }
-            }
+            .map { conferencesLocal -> conferencesLocal.map { it.toConferenceDomain() } }
 
         return Observable.combineLatest<List<Conference>, Result.Status, Result<List<Conference>>>(
             localStream,
             remoteStream,
             BiFunction { conferences, status -> Result(data = conferences, status = status) }
-        )
-            .startWith(Result<List<Conference>>(data = null, status = Result.Status.Loading))
+        ).startWith(Result<List<Conference>>(data = null, status = Result.Status.Loading))
     }
 
     override fun saveConferences(conferences: List<Conference>): Observable<Result.Status> {

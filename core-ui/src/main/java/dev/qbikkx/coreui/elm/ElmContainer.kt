@@ -3,8 +3,8 @@ package dev.qbikkx.coreui.elm
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
 
-open class ElmContainer<S : ElmStateModel, M : ElmMessage, E : ElmSideEffect, V : ElmViewModel>(
-    private val store: ElmStore<S, M, E, V>
+open class ElmContainer<S : ElmStateModel, V : ElmViewModel>(
+    private val store: ElmStore<S, V>
 ) : ViewModel() {
 
     private val wiring = store.wire()
@@ -18,7 +18,7 @@ open class ElmContainer<S : ElmStateModel, M : ElmMessage, E : ElmSideEffect, V 
         wiring.dispose()
     }
 
-    fun bind(view: MviView<M, V>) {
+    fun bind(view: MviView<V>) {
         viewBinding = store.bind(view)
     }
 

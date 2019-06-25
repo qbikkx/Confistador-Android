@@ -17,10 +17,19 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+            isZipAlignEnabled = true
             proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
             proguardFile("proguard-rules.pro")
-            file("./configs/proguard/libs").list().forEach { proguardFile(it) }
+            file("./configs/proguard/libs").list()!!.forEach { proguardFile(it) }
+        }
+        getByName("debug") {
+            isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
+            isZipAlignEnabled = false
         }
     }
     compileOptions {

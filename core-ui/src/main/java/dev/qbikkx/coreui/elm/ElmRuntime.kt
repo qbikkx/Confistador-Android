@@ -25,37 +25,38 @@ interface ElmStateModel
 
 interface ElmViewModel
 
-interface MviView<M : ElmMessage, V : ElmViewModel> {
-    val messages: Observable<M>
+interface MviView<V : ElmViewModel> {
+    val messages: Observable<ElmMessage>
     fun render(viewModel: V)
 }
 
-interface ElmReducer<S : ElmStateModel, M : ElmMessage, E : ElmSideEffect> {
-    fun reduce(state: S, message: M): Pair<S, E>
+interface ElmReducer<S : ElmStateModel> {
+    fun reduce(state: S, message: ElmMessage): Pair<S, ElmSideEffect>
 }
 
-interface Middleware<E : ElmSideEffect, M : ElmMessage> {
-    fun bind(effects: Observable<E>): Observable<M>
+interface Middleware {
+    fun bind(effects: Observable<ElmSideEffect>): Observable<ElmMessage>
 }
 
 interface StateViewMapper<S : ElmStateModel, V : ElmViewModel> {
     fun map(state: S): V
 }
 
-open class ElmStore<S : ElmStateModel, M : ElmMessage, E : ElmSideEffect, V : ElmViewModel>(
-    private val reducer: ElmReducer<S, M, E>,
-    private val middlewares: List<Middleware<E, M>>,
+open class ElmStore<S : ElmStateModel, V : ElmViewModel>(
+    private val reducer: ElmReducer<S>,
+    private val middlewares: List<Middleware>,
     private val stateMapper: StateViewMapper<S, V>,
     initialState: S,
+    private val initialMessage: ElmMessage?,
     private val execScheduler: Scheduler = Schedulers.from(Executors.newSingleThreadExecutor()),
     private val renderScheduler: Scheduler = AndroidSchedulers.from(Looper.getMainLooper(), true)
 ) {
 
     private val state = BehaviorRelay.createDefault(initialState)
 
-    private val sideEffects = PublishRelay.create<E>()
+    private val sideEffects = PublishRelay.create<ElmSideEffect>()
 
-    private val messages = PublishRelay.create<M>()
+    private val messages = PublishRelay.create<ElmMessage>()
 
     private val viewModel = BehaviorRelay.create<V>()
 
@@ -64,23 +65,29 @@ open class ElmStore<S : ElmStateModel, M : ElmMessage, E : ElmSideEffect, V : El
             this += messages
                 .filter { message -> message !is Idle }
                 .subscribeOn(execScheduler)
-                .withLatestFrom(state) { message, state -> reducer.reduce(state, message) }
-                .doOnNext { (newState, sideEffect) ->
+                .withLatestFrom<ElmMessage, S, Pair<S, ElmSideEffect>>(state) { message: ElmMessage, state: S ->
+                    reducer.reduce(state, message)
+                }
+                .doOnNext { (newState, sideEffect): Pair<S, ElmSideEffect> ->
                     if (sideEffect !is None) {
                         sideEffects.accept(sideEffect)
                     }
                     state.accept(newState)
                 }
-                .map { (newState, _) -> stateMapper.map(newState) }
+                .map { (newState, _): Pair<S, ElmSideEffect> -> stateMapper.map(newState) }
                 .distinctUntilChanged()
                 .subscribe(viewModel::accept)
-            this += Observable.merge(middlewares.map { it.bind(sideEffects) }).subscribe(messages::accept)
+            this += Observable.merge(middlewares.map { it.bind(sideEffects) })
+                .cast(ElmMessage::class.java)
+                .observeOn(execScheduler)
+                .subscribe { messages.accept(it) }
+            initialMessage?.also { messages.accept(it) }
         }
     }
 
-    fun bind(view: MviView<M, V>): Disposable {
+    fun bind(view: MviView<V>): Disposable {
         return CompositeDisposable().apply {
-            this += view.messages.observeOn(execScheduler).subscribe(messages::accept)
+            this += view.messages.observeOn(execScheduler).subscribe { messages.accept(it) }
             this += viewModel.observeOn(renderScheduler).subscribe(view::render)
         }
     }
