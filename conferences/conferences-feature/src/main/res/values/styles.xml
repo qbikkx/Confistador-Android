@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="ConferenceListItemTitle">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/avenir_medium</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="ConferenceListItemSubtitle">
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/avenir_regular</item>
+    </style>
+
+</resources>

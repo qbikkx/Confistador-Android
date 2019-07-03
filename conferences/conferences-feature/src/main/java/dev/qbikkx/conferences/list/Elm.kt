@@ -1,6 +1,5 @@
 package dev.qbikkx.conferences.list
 
-import android.util.Log
 import dev.qbikkx.conferences.core.Conference
 import dev.qbikkx.conferences.domain.GetConferencesUseCase
 import dev.qbikkx.core.domain.Result
@@ -43,7 +42,6 @@ internal data class ConfListState(
 internal class ConferencesListReducer : ElmReducer<ConfListState> {
 
     override fun reduce(state: ConfListState, message: ElmMessage): Pair<ConfListState, ElmSideEffect> {
-        Log.d("WOW", "$message")
         return when (message) {
             Message.Init, Message.Refresh -> state to SideEffect.LoadRequest
             is Message.ConferencesResult -> onConferencesResult(message, state)

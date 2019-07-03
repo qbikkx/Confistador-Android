@@ -6,7 +6,8 @@ import dev.qbikkx.conferences.remote.model.ConferenceRemote
 import java.text.SimpleDateFormat
 import java.util.*
 
-private val confRemoteDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+private val confRemoteDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+private val confDomainDateFormat = SimpleDateFormat("dd MMM, yyyy", Locale.US)
 
 fun ConferenceLocal.toConferenceDomain() = Conference(
     name = name,
@@ -15,21 +16,9 @@ fun ConferenceLocal.toConferenceDomain() = Conference(
     city = city,
     country = country,
     twitter = twitter,
-    cfpEndDate = cfpEndDate?.let { Date(it * 1000L) },
-    startDate = Date(startDate * 1000L),
-    endDate = Date(endDate * 1000L)
-)
-
-fun ConferenceRemote.toConferenceDomain() = Conference(
-    name = name,
-    url = url,
-    cfpUrl = cfpUrl,
-    city = city,
-    country = country,
-    twitter = twitter,
-    cfpEndDate = cfpEndDate?.let { confRemoteDateFormat.parse(it) },
-    startDate = confRemoteDateFormat.parse(startDate),
-    endDate = confRemoteDateFormat.parse(endDate)
+    cfpEndDate = cfpEndDate?.let { confDomainDateFormat.format(Date(it * 1000L)) },
+    startDate = confDomainDateFormat.format(Date(startDate * 1000L)),
+    endDate = confDomainDateFormat.format(Date(endDate * 1000L))
 )
 
 fun ConferenceRemote.toConferenceLocal() = ConferenceLocal(
@@ -51,7 +40,7 @@ fun Conference.toConferenceLocal() = ConferenceLocal(
     city = city,
     country = country,
     twitter = twitter,
-    cfpEndDate = cfpEndDate?.let { (cfpEndDate!!.time / 1000).toInt() },
-    startDate = (startDate.time / 1000).toInt(),
-    endDate = (endDate.time / 1000).toInt()
+    cfpEndDate = cfpEndDate?.let { (confDomainDateFormat.parse(it).time / 1000).toInt() },
+    startDate = (confDomainDateFormat.parse(startDate).time / 1000).toInt(),
+    endDate = (confDomainDateFormat.parse(endDate).time / 1000).toInt()
 )

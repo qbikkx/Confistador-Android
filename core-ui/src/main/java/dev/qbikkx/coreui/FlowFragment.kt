@@ -1,7 +1,7 @@
 package dev.qbikkx.coreui
 
 import android.os.Bundle
-import androidx.core.view.WindowInsetsCompat
+import android.view.WindowInsets
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import ru.terrakok.cicerone.Navigator
@@ -61,8 +61,8 @@ abstract class FlowFragment : BaseFragment() {
         currentFragment?.onBackPressed() ?: super.onBackPressed()
     }
 
-    override fun updateInsets(insets: WindowInsetsCompat?): WindowInsetsCompat? {
-        return currentFragment?.updateInsets(insets) ?: insets
+    override fun onApplyWindowInsets(insets: WindowInsets) {
+        currentFragment?.onApplyWindowInsets(insets)
     }
 
     override fun onResume() {

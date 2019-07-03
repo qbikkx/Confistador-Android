@@ -4,8 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.WindowInsets
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 
 
@@ -72,7 +72,5 @@ abstract class BaseFragment : Fragment() {
 
     open fun onBackPressed() {}
 
-    open fun updateInsets(insets: WindowInsetsCompat?): WindowInsetsCompat? {
-        return insets
-    }
+    open fun onApplyWindowInsets(insets: WindowInsets) {}
 }

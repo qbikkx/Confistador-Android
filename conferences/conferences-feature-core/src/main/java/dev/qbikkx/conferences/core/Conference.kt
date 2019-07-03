@@ -1,15 +1,13 @@
 package dev.qbikkx.conferences.core
 
-import java.util.*
-
 data class Conference(
     val name: String,
     val url: String,
-    val startDate: Date,
-    val endDate: Date,
+    val startDate: String,
+    val endDate: String,
     val city: String,
     val country: String,
     val cfpUrl: String? = null,
-    val cfpEndDate: Date? = null,
+    val cfpEndDate: String? = null,
     val twitter: String? = null
 )

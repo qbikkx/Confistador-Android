@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.qbikkx.conferences.R
 import dev.qbikkx.conferences.core.Conference
 
-internal class ConferencesAdapter() : ListAdapter<Conference, ConferencesAdapter.ViewHolder>(DIFF_UTILL) {
+internal class ConferencesAdapter : ListAdapter<Conference, ConferencesAdapter.ViewHolder>(DIFF_UTILL) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =  LayoutInflater.from(parent.context).inflate(R.layout.list_item_conference, parent, false)
         return ViewHolder(view)
@@ -24,9 +24,12 @@ internal class ConferencesAdapter() : ListAdapter<Conference, ConferencesAdapter
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
         private val title = view.findViewById<TextView>(R.id.title)
+        private val subtitle = view.findViewById<TextView>(R.id.subtitle)
 
         fun bind(conference: Conference) {
-            title.text = conference.toString()
+            itemView.setOnClickListener {  }
+            title.text = "${conference.name} ${conference.city.substringBefore(',')}"
+            subtitle.text = "${conference.country} | ${conference.startDate}"
         }
     }
 

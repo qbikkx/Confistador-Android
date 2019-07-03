@@ -1,5 +1,6 @@
 package dev.qbikkx.coreui
 
+import android.content.res.Resources
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.BackTo
@@ -13,3 +14,7 @@ fun Navigator.setLaunchScreen(screen: SupportAppScreen) {
         )
     )
 }
+
+fun Int.toDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+fun Int.toPx(): Float = (this * Resources.getSystem().displayMetrics.density)

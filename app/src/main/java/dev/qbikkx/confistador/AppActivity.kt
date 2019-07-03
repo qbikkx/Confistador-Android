@@ -7,6 +7,7 @@ import dev.qbikkx.conferences.ConferencesFlow
 import dev.qbikkx.confistador.di.AppActivityInitializer
 import dev.qbikkx.coreui.BaseActivity
 import dev.qbikkx.coreui.BaseFragment
+import kotlinx.android.synthetic.main.activity_app.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -50,7 +51,11 @@ class AppActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        app_fragment_container.setOnApplyWindowInsetsListener { _, insets ->
+            currentFragment?.onApplyWindowInsets(insets)
+            insets.replaceSystemWindowInsets(0, 0, 0, 0)
+        }
+        app_fragment_container.requestApplyInsets()
         savedInstanceState ?: router.newRootScreen(ConferencesFlow())
     }
 

@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:padding="10dp">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:background="@drawable/conference_item_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
-            android:id="@+id/title"
+            android:id="@+id/subtitle"
+            android:layout_marginTop="8dp"
+            style="@style/ConferenceListItemSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Germany | 12 Jun 2019"/>
+    <TextView
+            android:id="@+id/title"
+            style="@style/ConferenceListItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtitle"
+            tools:text="Conference name Berlin"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_demi_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="28dp"
+            android:text="# Android"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="# Android"
     />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
