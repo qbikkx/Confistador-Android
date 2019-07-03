@@ -29,7 +29,7 @@ internal class ConferencesAdapter : ListAdapter<Conference, ConferencesAdapter.V
         fun bind(conference: Conference) {
             itemView.setOnClickListener {  }
             title.text = "${conference.name} ${conference.city.substringBefore(',')}"
-            subtitle.text = "${conference.country} | ${conference.startDate}"
+            subtitle.text = "${conference.country} | ${conference.startDate.substringBefore(',')}"
         }
     }
 

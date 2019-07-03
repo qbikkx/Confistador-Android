@@ -12,4 +12,5 @@
     <color name="colorTextOnPrimary">@color/white</color>
     <color name="colorTextOnSecondary">@color/black</color>
     <color name="grey">#e0e0e0</color>
+    <color name="twitter_color">#00aced</color>
 </resources>
