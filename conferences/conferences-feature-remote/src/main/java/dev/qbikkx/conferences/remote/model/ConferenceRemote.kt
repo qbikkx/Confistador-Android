@@ -1,17 +1,15 @@
 package dev.qbikkx.conferences.remote.model
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
-@JsonClass(generateAdapter = true)
 data class ConferenceRemote(
-    @Json(name = "name") val name: String,
-    @Json(name = "url") val url: String,
-    @Json(name = "startDate") val startDate: String,
-    @Json(name = "endDate") val endDate: String,
-    @Json(name = "city") val city: String,
-    @Json(name = "country") val country: String,
-    @Json(name = "cfpUrl") val cfpUrl: String? = null,
-    @Json(name = "cfpEndDate") val cfpEndDate: String? = null,
-    @Json(name = "twitter") val twitter: String? = null
+    @SerializedName(value = "name") val name: String,
+    @SerializedName(value = "url") val url: String,
+    @SerializedName(value = "startDate") val startDate: String,
+    @SerializedName(value = "endDate") val endDate: String,
+    @SerializedName(value = "city") val city: String,
+    @SerializedName(value = "country") val country: String,
+    @SerializedName(value = "cfpUrl") val cfpUrl: String? = null,
+    @SerializedName(value = "cfpEndDate") val cfpEndDate: String? = null,
+    @SerializedName(value = "twitter") val twitter: String? = null
 )

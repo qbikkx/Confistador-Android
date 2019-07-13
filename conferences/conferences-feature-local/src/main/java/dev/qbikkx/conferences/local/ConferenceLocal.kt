@@ -14,5 +14,6 @@ data class ConferenceLocal(
     @ColumnInfo(name = "conf_country") val country: String,
     @ColumnInfo(name = "conf_cfpUrl") val cfpUrl: String? = null,
     @ColumnInfo(name = "conf_cfpEndDate") val cfpEndDate: Int? = null,
-    @ColumnInfo(name = "conf_twitter") val twitter: String? = null
+    @ColumnInfo(name = "conf_twitter") val twitter: String? = null,
+    @ColumnInfo(name = "categories") val categories: List<String>
 )

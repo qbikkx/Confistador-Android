@@ -1,9 +1,8 @@
 object Versions {
-    const val kotlin = "1.3.31"
+    const val kotlin = "1.3.41"
     const val rxJava = "2.2.8"
     const val rxAndroid = "2.1.1"
     const val dagger = "2.22.1"
-    const val moshi = "1.8.0"
     const val cicerone = "5.0.0"
     const val room = "2.1.0-alpha07"
     const val ktx = "1.0.1"
@@ -20,6 +19,7 @@ object Versions {
     const val rxRelay = "2.1.0"
     const val rxKotlin = "2.3.0"
     const val viewModel = "2.0.0"
+    const val gson = "2.8.5"
 }
 
 object Dependencies {
@@ -37,10 +37,7 @@ object Dependencies {
         const val kapt = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     }
 
-    object Moshi {
-        const val runtime = "com.squareup.moshi:moshi:${Versions.moshi}"
-        const val kapt = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
-    }
+    const val gson = "com.google.code.gson:gson:${Versions.gson}"
 
     const val cicerone = "ru.terrakok.cicerone:cicerone:${Versions.cicerone}"
 
@@ -61,7 +58,7 @@ object Dependencies {
 
     object Retrofit {
         const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-        const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+        const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
         const val rxAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     }
 

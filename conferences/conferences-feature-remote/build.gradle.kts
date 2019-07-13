@@ -41,11 +41,9 @@ dependencies {
 
     implementation(Dependencies.Retrofit.core)
     implementation(Dependencies.Retrofit.rxAdapter)
-    implementation(Dependencies.Retrofit.moshiConverter)
+    implementation(Dependencies.Retrofit.gsonConverter)
 
-    implementation(Dependencies.Moshi.runtime)
-    kapt(Dependencies.Moshi.kapt)
-
+    implementation(Dependencies.gson)
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.testRunner)
 }
