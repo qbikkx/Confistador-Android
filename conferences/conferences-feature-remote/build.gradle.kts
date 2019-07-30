@@ -43,6 +43,8 @@ dependencies {
     implementation(Dependencies.Retrofit.rxAdapter)
     implementation(Dependencies.Retrofit.gsonConverter)
 
+    implementation(Dependencies.Firebase.firestore)
+
     implementation(Dependencies.gson)
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.testRunner)

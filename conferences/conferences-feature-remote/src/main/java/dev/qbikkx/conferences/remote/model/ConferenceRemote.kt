@@ -1,15 +1,14 @@
 package dev.qbikkx.conferences.remote.model
 
-import com.google.gson.annotations.SerializedName
-
 data class ConferenceRemote(
-    @SerializedName(value = "name") val name: String,
-    @SerializedName(value = "url") val url: String,
-    @SerializedName(value = "startDate") val startDate: String,
-    @SerializedName(value = "endDate") val endDate: String,
-    @SerializedName(value = "city") val city: String,
-    @SerializedName(value = "country") val country: String,
-    @SerializedName(value = "cfpUrl") val cfpUrl: String? = null,
-    @SerializedName(value = "cfpEndDate") val cfpEndDate: String? = null,
-    @SerializedName(value = "twitter") val twitter: String? = null
+    val name: String = "",
+    val url: String = "",
+    val startDate: String = "",
+    val endDate: String = "",
+    val city: String = "",
+    val country: String = "",
+    val cfpUrl: String? = null,
+    val cfpStartDate: String? = null,
+    val cfpEndDate: String? = null,
+    val twitter: String? = null
 )

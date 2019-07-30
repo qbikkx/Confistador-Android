@@ -30,6 +30,12 @@ object Dependencies {
     const val rxRelay = "com.jakewharton.rxrelay2:rxrelay:${Versions.rxRelay}"
     const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
 
+
+    object Firebase {
+        const val core = "com.google.firebase:firebase-core:17.0.1"
+        const val firestore = "com.google.firebase:firebase-firestore-ktx:20.1.0"
+    }
+
     const val viewModel = "androidx.lifecycle:lifecycle-extensions:${Versions.viewModel}"
 
     object Dagger {

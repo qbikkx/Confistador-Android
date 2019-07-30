@@ -57,3 +57,5 @@ dependencies {
     implementation(Dependencies.stetho)
     implementation(Dependencies.cicerone)
 }
+
+apply(plugin = "com.google.gms.google-services")

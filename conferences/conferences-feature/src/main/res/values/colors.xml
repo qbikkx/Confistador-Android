@@ -1,3 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="android_green">#a4c639</color>
+    <color name="clojure">#db5855</color>
+    <color name="css">#563d7c</color>
+    <color name="data">#a52a2a</color>
+    <color name="dev_ops">#00008b</color>
+    <color name="dot_net">#178600</color>
+    <color name="elixir">#6e4a7e</color>
+    <color name="general">#48d1cc</color>
+    <color name="go_lang">#00add8</color>
+    <color name="graph_ql">#800080</color>
+    <color name="ios">#00bfff</color>
+    <color name="java">#b07219</color>
+    <color name="java_script">#f1e05a</color>
+    <color name="networking">#fffacd</color>
+    <color name="php">#4f5d95</color>
+    <color name="python">#3572a5</color>
+    <color name="ruby">#701516</color>
+    <color name="rust">#dea584</color>
+    <color name="scala">#c22d40</color>
+    <color name="security">#4b0082</color>
+    <color name="tech_comm">#778899</color>
+    <color name="ux">#ffdead</color>
 </resources>

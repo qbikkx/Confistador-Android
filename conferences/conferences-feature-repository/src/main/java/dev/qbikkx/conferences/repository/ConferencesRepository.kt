@@ -29,6 +29,7 @@ internal class ConferencesRepositoryImpl @Inject constructor(
             .subscribeOn(Schedulers.io())
             .flatMap { conferencesRemote ->
                 local.saveConferences(conferencesRemote.map { it.toConferenceLocal() })
+                    .subscribeOn(Schedulers.single())
                     .toSingleDefault(Result.Status.Success as Result.Status)
             }
             .onErrorReturn { Result.Status.Error(it) }

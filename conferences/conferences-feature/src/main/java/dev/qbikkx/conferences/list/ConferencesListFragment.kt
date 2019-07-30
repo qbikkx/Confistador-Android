@@ -2,7 +2,9 @@ package dev.qbikkx.conferences.list
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowInsets
+import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.PublishRelay
@@ -34,28 +36,30 @@ internal class ConferencesListFragment : BaseFragment(), MviView<ConfListViewMod
 
     override fun subscribeToEvents() {}
 
+    override fun onResume() {
+        super.onResume()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.apply {
-            layoutManager = object : LinearLayoutManager(activity) {
-
-            }
+            layoutManager = LinearLayoutManager(context)
             adapter = conferencesAdapter
         }
         swipeRefreshLayout.setOnRefreshListener { messagesRelay.accept(Message.Refresh) }
-        recyclerView.addOnScrollListener( object : RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             private val elevation: Float = 8.toPx()
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             }
+
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val offset = recyclerView.computeVerticalScrollOffset()
-                if(offset != 0 && statusBarView.elevation == 0f) {
+                if (offset != 0 && statusBarView.elevation == 0f) {
                     statusBarView.elevation = elevation
-                } else if (offset == 0 && statusBarView.elevation != 0f){
+                } else if (offset == 0 && statusBarView.elevation != 0f) {
                     statusBarView.elevation = 0f
                 }
             }
@@ -72,6 +76,8 @@ internal class ConferencesListFragment : BaseFragment(), MviView<ConfListViewMod
 
     override fun onApplyWindowInsets(insets: WindowInsets) {
         statusBarView.layoutParams.height = insets.systemWindowInsetTop
+        val margins = filterBtn.layoutParams as ViewGroup.MarginLayoutParams
+        margins.updateMargins(bottom =  margins.bottomMargin + insets.systemWindowInsetBottom)
     }
 
     override fun render(viewModel: ConfListViewModel) {

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "456074621388",
+    "firebase_url": "https://disco-abacus-219713.firebaseio.com",
+    "project_id": "disco-abacus-219713",
+    "storage_bucket": "disco-abacus-219713.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456074621388:android:81e82084674090d4",
+        "android_client_info": {
+          "package_name": "dev.qbikkx.confistador"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456074621388-39s8808pjo4l3ofmjblil0c1k1isbrao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ9Mq75yaJTDdylohv4aC9XAART_WscNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456074621388-39s8808pjo4l3ofmjblil0c1k1isbrao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

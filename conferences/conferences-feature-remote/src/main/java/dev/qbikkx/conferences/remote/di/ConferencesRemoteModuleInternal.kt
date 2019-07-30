@@ -1,5 +1,6 @@
 package dev.qbikkx.conferences.remote.di
 
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -65,4 +66,8 @@ internal object ConferencesRemoteModuleInternal {
     @JvmStatic
     @Provides
     fun provideConferencesApi(retrofit: Retrofit) = retrofit.create(ConferencesApi::class.java)
+
+    @JvmStatic
+    @Provides
+    fun provideFirestore() = FirebaseFirestore.getInstance()
 }
